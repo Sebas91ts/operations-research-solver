@@ -29,7 +29,7 @@ export default function TablaVertices({ restrictions, fo, fotype }) {
           <tr>
             <th className='border px-4 py-2 text-left'>Vértice</th>
             <th className='border px-4 py-2 text-left'>Coordenadas (x1, x2)</th>
-            <th className='border px-4 py-2 text-left'>FO</th>
+            <th className='border px-4 py-2 text-left'>Z</th>
           </tr>
         </thead>
         <tbody>

@@ -49,7 +49,7 @@ export default function Metodo_grafico() {
 
   return (
     <div className='flex flex-col items-center justify-center min-h-screen space-y-8'>
-      {/* Formulario */}
+      {/* Formulario para inputs  */}
       <div className='p-4 space-y-4 border rounded shadow max-w-lg w-full'>
         {restrictions.map((r, idx) => (
           <div key={idx} className='flex items-center space-x-2'>
@@ -146,7 +146,7 @@ export default function Metodo_grafico() {
         <Graph restrictions={restrictions} />
       </div>
 
-      {/* Tabla centrada */}
+      {/* Tabla Final de Resultados */}
       {calulate && (
         <div className='flex items-center justify-center w-full'>
           <Tabla
