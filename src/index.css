@@ -1,1 +1,188 @@
 @import 'tailwindcss';
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to FC Barcelona blaugrana color scheme */
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --card: #f8fafc;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #004d98; /* Barcelona blue */
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1a1a1a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #a50044; /* Barcelona garnet */
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #ffffff;
+  --ring: #004d98;
+  --chart-1: #004d98;
+  --chart-2: #a50044;
+  --chart-3: #ffcb05; /* Barcelona gold */
+  --chart-4: #0066cc;
+  --chart-5: #cc0044;
+  --radius: 0.75rem;
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #004d98;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #a50044;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #004d98;
+}
+
+.dark {
+  /* Dark mode with Barcelona colors */
+  --background: #0a0e1a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #0066cc; /* Lighter Barcelona blue for dark mode */
+  --primary-foreground: #ffffff;
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  --accent: #cc0055; /* Lighter garnet for dark mode */
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #0066cc;
+  --chart-1: #0066cc;
+  --chart-2: #cc0055;
+  --chart-3: #ffcb05;
+  --chart-4: #0080ff;
+  --chart-5: #ff0066;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    /* Added subtle gradient background */
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--muted)) 100%
+    );
+    min-height: 100vh;
+  }
+}
+
+/* Added custom Barcelona-inspired styles */
+@layer components {
+  .barca-gradient {
+    background: linear-gradient(135deg, #004d98 0%, #a50044 100%);
+    /* Ensure gradient always renders properly */
+    background-color: #004d98; /* Fallback color */
+  }
+
+  .barca-card {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 77, 152, 0.05) 0%,
+      rgba(165, 0, 68, 0.05) 100%
+    );
+    border: 1px solid rgba(0, 77, 152, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Improved gold color for better contrast on light backgrounds */
+  .gold-accent {
+    color: #b8860b !important; /* Darker gold for better contrast */
+  }
+
+  /* Added high contrast gold for dark backgrounds */
+  .gold-accent-dark {
+    color: #b8860b !important; /* Using darker gold for better contrast */
+  }
+
+  .barca-shadow {
+    box-shadow: 0 10px 25px rgba(0, 77, 152, 0.1),
+      0 4px 10px rgba(165, 0, 68, 0.05);
+  }
+
+  /* Enhanced navbar styles with guaranteed high contrast */
+  .navbar-text {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .navbar-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .navbar-link:hover {
+    color: #ffffff !important;
+  }
+}

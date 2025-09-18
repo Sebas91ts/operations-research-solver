@@ -8,19 +8,48 @@ import {
 const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export default function Graph({ restrictions }) {
+  if (!restrictions || restrictions.length === 0) {
+    return (
+      <div className='flex items-center justify-center w-full h-96 border-2 border-dashed border-gray-300 rounded-lg'>
+        <p className='text-gray-500'>
+          Ingrese restricciones para ver el gráfico
+        </p>
+      </div>
+    )
+  }
+
   // 1. Parsear restricciones a formato numérico
   const parsedRestrictions = restrictions
     .filter((r) => r.x1 !== '' && r.x2 !== '' && r.b !== '') // ignorar vacíos
     .map((r) => ({
-      a: [parseFloat(r.x1), parseFloat(r.x2)],
+      a: [Number.parseFloat(r.x1), Number.parseFloat(r.x2)],
       type: r.type,
-      b: parseFloat(r.b)
+      b: Number.parseFloat(r.b)
     }))
+
+  if (parsedRestrictions.length === 0) {
+    return (
+      <div className='flex items-center justify-center w-full h-96 border-2 border-dashed border-gray-300 rounded-lg'>
+        <p className='text-gray-500'>
+          Complete las restricciones para ver el gráfico
+        </p>
+      </div>
+    )
+  }
+
   // 2. Calcular intersecciones
   const points = Intersecciones(parsedRestrictions)
 
   // 3. Filtrar solo puntos factibles
   const factibles = filtrarFactibles(points, parsedRestrictions)
+
+  if (!factibles || factibles.length === 0) {
+    return (
+      <div className='flex items-center justify-center w-full h-96 border-2 border-dashed border-gray-300 rounded-lg'>
+        <p className='text-gray-500'>No se encontraron puntos factibles</p>
+      </div>
+    )
+  }
 
   // 4. Crear arrays ordenados para Plotly
   const factiblesOrdenados = ordenarPoligono(factibles)
@@ -89,17 +118,75 @@ export default function Graph({ restrictions }) {
         puntosFactibles
       ]}
       layout={{
-        width: 1000,
-        height: 600,
-        title: 'Método gráfico de programación lineal',
-        xaxis: { title: 'X1', range: [0, Math.max(...xFactibles, 10)] },
-        yaxis: { title: 'X2', range: [0, Math.max(...yFactibles, 10)] },
-        dragmode: 'pan'
+        width: undefined,
+        height: window.innerWidth < 768 ? 350 : 450,
+        title: {
+          text: 'Método Gráfico de Programación Lineal',
+          font: {
+            size: window.innerWidth < 768 ? 14 : 16,
+            color: '#1e40af',
+            family: 'Arial, sans-serif'
+          },
+          x: 0.5,
+          xanchor: 'center'
+        },
+        xaxis: {
+          title: {
+            text: 'X₁',
+            font: { size: window.innerWidth < 768 ? 12 : 14, color: '#374151' }
+          },
+          range: [0, Math.max(...xFactibles, 10)],
+          gridcolor: '#e5e7eb',
+          gridwidth: 1,
+          zeroline: true,
+          zerolinecolor: '#6b7280',
+          zerolinewidth: 2
+        },
+        yaxis: {
+          title: {
+            text: 'X₂',
+            font: { size: window.innerWidth < 768 ? 12 : 14, color: '#374151' }
+          },
+          range: [0, Math.max(...yFactibles, 10)],
+          gridcolor: '#e5e7eb',
+          gridwidth: 1,
+          zeroline: true,
+          zerolinecolor: '#6b7280',
+          zerolinewidth: 2
+        },
+        dragmode: 'pan',
+        margin: {
+          l: window.innerWidth < 768 ? 35 : 50,
+          r: window.innerWidth < 768 ? 25 : 40,
+          t: window.innerWidth < 768 ? 45 : 60,
+          b: window.innerWidth < 768 ? 35 : 50
+        },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(248,250,252,0.8)',
+        legend: {
+          x: window.innerWidth < 768 ? 0.5 : 0.02,
+          y: window.innerWidth < 768 ? -0.15 : 0.98,
+          xanchor: window.innerWidth < 768 ? 'center' : 'left',
+          yanchor: window.innerWidth < 768 ? 'top' : 'top',
+          bgcolor: 'rgba(255,255,255,0.9)',
+          bordercolor: '#d1d5db',
+          borderwidth: 1,
+          font: { size: window.innerWidth < 768 ? 8 : 10 },
+          orientation: window.innerWidth < 768 ? 'h' : 'v',
+          itemsizing: 'constant',
+          itemwidth: window.innerWidth < 768 ? 20 : 25
+        },
+        autosize: true,
+        responsive: true
       }}
       config={{
         scrollZoom: true,
-        displayModeBar: false
+        displayModeBar: false,
+        displaylogo: false,
+        responsive: true
       }}
+      style={{ width: '100%', height: '100%', maxWidth: '100%' }}
+      useResizeHandler={true}
     />
   )
 }
