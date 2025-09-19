@@ -133,7 +133,7 @@ export default function Navbar() {
               </div>
               <div className='p-4 bg-red-50 rounded-lg border-l-4 border-red-500'>
                 <h3 className='font-semibold text-red-800'>
-                  Jhon Alenxander Arnold
+                  Jhon Alenxander Sanchez Rodriguez
                 </h3>
               </div>
             </div>
