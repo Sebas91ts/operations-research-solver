@@ -1,10 +1,10 @@
-import Plot from 'react-plotly.js'
 import {
   Intersecciones,
   filtrarFactibles,
   ordenarPoligono
 } from '../utils/metodo_grafico' // importa tus funciones
-
+import React, { Suspense } from 'react'
+const Plot = React.lazy(() => import('react-plotly.js'))
 const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export default function Graph({ restrictions }) {
@@ -103,90 +103,98 @@ export default function Graph({ restrictions }) {
   })
 
   return (
-    <Plot
-      data={[
-        ...lineasRestricciones,
-        {
-          x: xFactibles,
-          y: yFactibles,
-          fill: 'toself',
-          fillcolor: 'rgba(0, 200, 0, 0.3)',
-          type: 'scatter',
-          name: 'Región factible',
-          line: { color: 'green', width: 0 }
-        },
-        puntosFactibles
-      ]}
-      layout={{
-        width: undefined,
-        height: window.innerWidth < 768 ? 350 : 450,
-        title: {
-          text: 'Método Gráfico de Programación Lineal',
-          font: {
-            size: window.innerWidth < 768 ? 14 : 16,
-            color: '#1e40af',
-            family: 'Arial, sans-serif'
+    <Suspense fallback={<div>Cargando gráfico...</div>}>
+      <Plot
+        data={[
+          ...lineasRestricciones,
+          {
+            x: xFactibles,
+            y: yFactibles,
+            fill: 'toself',
+            fillcolor: 'rgba(0, 200, 0, 0.3)',
+            type: 'scatter',
+            name: 'Región factible',
+            line: { color: 'green', width: 0 }
           },
-          x: 0.5,
-          xanchor: 'center'
-        },
-        xaxis: {
+          puntosFactibles
+        ]}
+        layout={{
+          width: undefined,
+          height: window.innerWidth < 768 ? 350 : 450,
           title: {
-            text: 'X₁',
-            font: { size: window.innerWidth < 768 ? 12 : 14, color: '#374151' }
+            text: 'Método Gráfico de Programación Lineal',
+            font: {
+              size: window.innerWidth < 768 ? 14 : 16,
+              color: '#1e40af',
+              family: 'Arial, sans-serif'
+            },
+            x: 0.5,
+            xanchor: 'center'
           },
-          range: [0, Math.max(...xFactibles, 10)],
-          gridcolor: '#e5e7eb',
-          gridwidth: 1,
-          zeroline: true,
-          zerolinecolor: '#6b7280',
-          zerolinewidth: 2
-        },
-        yaxis: {
-          title: {
-            text: 'X₂',
-            font: { size: window.innerWidth < 768 ? 12 : 14, color: '#374151' }
+          xaxis: {
+            title: {
+              text: 'X₁',
+              font: {
+                size: window.innerWidth < 768 ? 12 : 14,
+                color: '#374151'
+              }
+            },
+            range: [0, Math.max(...xFactibles, 10)],
+            gridcolor: '#e5e7eb',
+            gridwidth: 1,
+            zeroline: true,
+            zerolinecolor: '#6b7280',
+            zerolinewidth: 2
           },
-          range: [0, Math.max(...yFactibles, 10)],
-          gridcolor: '#e5e7eb',
-          gridwidth: 1,
-          zeroline: true,
-          zerolinecolor: '#6b7280',
-          zerolinewidth: 2
-        },
-        dragmode: 'pan',
-        margin: {
-          l: window.innerWidth < 768 ? 35 : 50,
-          r: window.innerWidth < 768 ? 25 : 40,
-          t: window.innerWidth < 768 ? 45 : 60,
-          b: window.innerWidth < 768 ? 35 : 50
-        },
-        paper_bgcolor: 'rgba(0,0,0,0)',
-        plot_bgcolor: 'rgba(248,250,252,0.8)',
-        legend: {
-          x: window.innerWidth < 768 ? 0.5 : 0.02,
-          y: window.innerWidth < 768 ? -0.15 : 0.98,
-          xanchor: window.innerWidth < 768 ? 'center' : 'left',
-          yanchor: window.innerWidth < 768 ? 'top' : 'top',
-          bgcolor: 'rgba(255,255,255,0.9)',
-          bordercolor: '#d1d5db',
-          borderwidth: 1,
-          font: { size: window.innerWidth < 768 ? 8 : 10 },
-          orientation: window.innerWidth < 768 ? 'h' : 'v',
-          itemsizing: 'constant',
-          itemwidth: window.innerWidth < 768 ? 20 : 25
-        },
-        autosize: true,
-        responsive: true
-      }}
-      config={{
-        scrollZoom: true,
-        displayModeBar: false,
-        displaylogo: false,
-        responsive: true
-      }}
-      style={{ width: '100%', height: '100%', maxWidth: '100%' }}
-      useResizeHandler={true}
-    />
+          yaxis: {
+            title: {
+              text: 'X₂',
+              font: {
+                size: window.innerWidth < 768 ? 12 : 14,
+                color: '#374151'
+              }
+            },
+            range: [0, Math.max(...yFactibles, 10)],
+            gridcolor: '#e5e7eb',
+            gridwidth: 1,
+            zeroline: true,
+            zerolinecolor: '#6b7280',
+            zerolinewidth: 2
+          },
+          dragmode: 'pan',
+          margin: {
+            l: window.innerWidth < 768 ? 35 : 50,
+            r: window.innerWidth < 768 ? 25 : 40,
+            t: window.innerWidth < 768 ? 45 : 60,
+            b: window.innerWidth < 768 ? 35 : 50
+          },
+          paper_bgcolor: 'rgba(0,0,0,0)',
+          plot_bgcolor: 'rgba(248,250,252,0.8)',
+          legend: {
+            x: window.innerWidth < 768 ? 0.5 : 0.02,
+            y: window.innerWidth < 768 ? -0.15 : 0.98,
+            xanchor: window.innerWidth < 768 ? 'center' : 'left',
+            yanchor: window.innerWidth < 768 ? 'top' : 'top',
+            bgcolor: 'rgba(255,255,255,0.9)',
+            bordercolor: '#d1d5db',
+            borderwidth: 1,
+            font: { size: window.innerWidth < 768 ? 8 : 10 },
+            orientation: window.innerWidth < 768 ? 'h' : 'v',
+            itemsizing: 'constant',
+            itemwidth: window.innerWidth < 768 ? 20 : 25
+          },
+          autosize: true,
+          responsive: true
+        }}
+        config={{
+          scrollZoom: true,
+          displayModeBar: false,
+          displaylogo: false,
+          responsive: true
+        }}
+        style={{ width: '100%', height: '100%', maxWidth: '100%' }}
+        useResizeHandler={true}
+      />
+    </Suspense>
   )
 }
