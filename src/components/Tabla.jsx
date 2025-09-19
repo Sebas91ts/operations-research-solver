@@ -4,7 +4,7 @@ import {
   filtrarFactibles,
   ValoresZ,
   ResolucionFO
-} from '../utils/metodo_grafico'
+} from '../utils/metodo_grafico.js'
 
 export default function TablaVertices({
   restrictions,

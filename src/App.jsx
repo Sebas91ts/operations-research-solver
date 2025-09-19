@@ -1,4 +1,4 @@
-import Metodo_grafico from './pages/metodo_grafico'
+import Metodo_grafico from './pages/Metodo_grafico.jsx'
 import Navbar from './components/Navbar'
 export default function App() {
   return (

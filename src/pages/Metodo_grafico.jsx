@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Graph from '../components/graficadora'
+import Graph from '../components/Graficadora.jsx'
 import Tabla from '../components/Tabla'
 
 export default function Metodo_grafico() {

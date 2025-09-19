@@ -2,7 +2,7 @@ import {
   Intersecciones,
   filtrarFactibles,
   ordenarPoligono
-} from '../utils/metodo_grafico' // importa tus funciones
+} from '../utils/metodo_grafico.js' // importa tus funciones
 import React, { Suspense } from 'react'
 const Plot = React.lazy(() => import('react-plotly.js'))
 const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
