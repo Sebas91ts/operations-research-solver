@@ -136,6 +136,11 @@ export default function Navbar() {
                   Jhon Alenxander Sanchez Rodriguez
                 </h3>
               </div>
+              <div className='p-4 bg-violet-50 rounded-lg border-l-4 border-violet-500'>
+                <h3 className='font-semibold text-black-800'>
+                  Miguel Angel Mamani Catarí
+                </h3>
+              </div>
             </div>
             <div className='mt-6 flex justify-end'>
               <button
