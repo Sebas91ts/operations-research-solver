@@ -8,6 +8,8 @@ const Plot = React.lazy(() => import('react-plotly.js'))
 const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export default function Graph({ restrictions }) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
   if (!restrictions || restrictions.length === 0) {
     return (
       <div className='flex items-center justify-center w-full h-96 border-2 border-dashed border-gray-300 rounded-lg'>
@@ -150,7 +152,7 @@ export default function Graph({ restrictions }) {
             title: {
               text: 'X₂',
               font: {
-                size: window.innerWidth < 768 ? 12 : 14,
+                size: isMobile ? 12 : 14,
                 color: '#374151'
               }
             },
@@ -163,25 +165,25 @@ export default function Graph({ restrictions }) {
           },
           dragmode: 'pan',
           margin: {
-            l: window.innerWidth < 768 ? 35 : 50,
-            r: window.innerWidth < 768 ? 25 : 40,
-            t: window.innerWidth < 768 ? 45 : 60,
-            b: window.innerWidth < 768 ? 35 : 50
+            l: isMobile ? 35 : 50,
+            r: isMobile ? 25 : 40,
+            t: isMobile ? 45 : 60,
+            b: isMobile ? 35 : 50
           },
           paper_bgcolor: 'rgba(0,0,0,0)',
           plot_bgcolor: 'rgba(248,250,252,0.8)',
           legend: {
-            x: window.innerWidth < 768 ? 0.5 : 0.02,
-            y: window.innerWidth < 768 ? -0.15 : 0.98,
-            xanchor: window.innerWidth < 768 ? 'center' : 'left',
-            yanchor: window.innerWidth < 768 ? 'top' : 'top',
+            x: isMobile ? 0.5 : 0.02,
+            y: isMobile ? -0.15 : 0.98,
+            xanchor: isMobile ? 'center' : 'left',
+            yanchor: isMobile ? 'top' : 'top',
             bgcolor: 'rgba(255,255,255,0.9)',
             bordercolor: '#d1d5db',
             borderwidth: 1,
-            font: { size: window.innerWidth < 768 ? 8 : 10 },
-            orientation: window.innerWidth < 768 ? 'h' : 'v',
+            font: { size: isMobile ? 8 : 10 },
+            orientation: isMobile ? 'h' : 'v',
             itemsizing: 'constant',
-            itemwidth: window.innerWidth < 768 ? 20 : 25
+            itemwidth: isMobile ? 20 : 25
           },
           autosize: true,
           responsive: true
